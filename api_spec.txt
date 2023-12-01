@@ -1,0 +1,108 @@
+ROUTES
+
+Get all posts
+GET /api/posts/
+
+
+<HTTP STATUS CODE 200>
+{
+	“Posts”:[
+		{
+			“id”:
+			“item_name”:
+			“item_description”:
+			“date”:
+			“location_name”:
+			“location_description”:
+			“user_id”:
+			“post_type”:
+	},
+	]
+}
+
+Create a post
+POST /api/posts/
+
+Request body
+{
+    "item_name": "Puffer jacket",
+    "item_description": "North Face, black, size XS",
+    “location_name”: “Goldwin Smith G67”,
+    “Location_description”: “under the table on the right",
+    "netid": 28,
+    "post_type": "found"
+
+}
+
+<HTTP STATUS CODE 201>
+{
+    "id":
+    "item_name": "Puffer jacket",
+    "item_description": "North Face, black, size XS",
+    “location_name”: “Goldwin Smith G67”,
+    “Location_description”: “under the table on the right",
+    "user_id": 28,
+    "post_type": false
+}
+
+
+Get a post
+GET /api/posts/{id}/
+
+<HTTP STATUS CODE 200>
+{
+    "id":
+    "item_name": "Puffer jacket",
+    "item_description": "North Face, black, size XS",
+    “location_name”: “Goldwin Smith G67”,
+    “Location_description”: “under the table on the right",
+    "user_id": 28,
+    "post_type": "found"
+}
+
+Delete a post
+DELETE /api/posts/{id}/
+
+<HTTP STATUS CODE 200>
+{
+    "id": 1,
+    "item_name": "Puffer jacket",
+    "item_description": "North Face, black, size XS",
+    “location_name”: “Goldwin Smith G67”,
+    “Location_description”: “under the table on the right",
+    "user_id": 28,
+    "post_type": "found"
+}
+
+Create a user
+POST /api/users/
+
+<HTTP STATUS CODE 201>
+{
+    "id": 1,
+    "name": "Larry Tao",
+    "netid": "ltt28",
+    "posts": [],
+}
+
+Get a user by id
+GET /api/users/{int:id}
+
+<HTTP STATUS CODE 200>
+{
+    "id": 1,   
+    "name": "Larry Tao",
+    "netid": "ltt28",
+    "posts": [<SERIALIZED POSTS>],
+}
+
+Get a user by netid
+GET /api/users/{string:netid}
+
+<HTTP STATUS CODE 200>
+{
+    "id": 1,
+    "name": "Larry Tao",
+    "netid": "ltt28",
+    "posts": [<SERIALIZED POSTS]
+"}
