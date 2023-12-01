@@ -38,11 +38,12 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     item_name = db.Column(db.String, nullable=False)
     item_desc = db.Column(db.String, nullable=True)
-    date = db.Column(db.Double, nullable=False)
+    date = db.Column(db.Float, nullable=False)
     loc_name = db.Column(db.String, nullable=False)
     loc_desc = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     post_type = db.Column(db.Boolean, nullable=False) # false means a lost item, true is a found item
+    image_url = db.Column(db.String, nullable=True)
 
     def __init__(self, **kwargs):
         """
@@ -55,6 +56,7 @@ class Post(db.Model):
         self.loc_desc = kwargs.get("loc_desc", "")
         self.user_id = kwargs.get("user_id", 0)
         self.post_type = kwargs.get("post_type", False)
+        self.image_url = kwargs.get("image_url", "")
     
     def serialize(self):
         """
@@ -68,5 +70,6 @@ class Post(db.Model):
             "loc_name":self.loc_name,
             "loc_desc":self.loc_desc,
             "netid":User.query.filter_by(id=self.user_id).first().netid,
-            "post_type":self.post_type
+            "post_type":self.post_type,
+            "image_url":self.image_url
         }

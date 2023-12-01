@@ -35,8 +35,8 @@ def get_posts():
     posts = [post.serialize() for post in Post.query.all()]
     return success_response({"posts":posts})
 
-@app.route("/api/posts/", methods=["POST"])
-def create_post():
+@app.route("/api/posts/<string:netid>/", methods=["POST"])
+def create_post(netid):
     """
     Create a post
     """
@@ -47,8 +47,9 @@ def create_post():
         date = datetime.utcnow().timestamp(),
         loc_name=body.get('loc_name'),
         loc_desc=body.get('loc_desc'),
-        user_id=body.get('user_id'),
-        post_type=body.get('post_type')
+        user_id=User.query.filter_by(netid=netid).first().id,
+        post_type=body.get('post_type'),
+        image_url=body.get('image_url')
     )
     if (
             new_post.item_name is None or 
@@ -89,9 +90,6 @@ def create_user():
     """
     Create a user
     """
-    """
-    Create a post
-    """
     body = json.loads(request.data)
     new_user = User(
         name=body.get('name'),
@@ -117,6 +115,9 @@ def get_user_by_id(user_id):
 
 @app.route("/api/users/<string:netid>/")
 def get_user_by_netid(netid):
+    """
+    Get user by netid
+    """
     user = User.query.filter_by(netid=netid).first()
     if user is None:
         return failure_response("User not found!", 404)
