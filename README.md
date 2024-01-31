@@ -3,7 +3,7 @@ AppDev Hack Challenge 2023
 
 ## Frontend
 
-Frontend can be found at https://github.com/larrytao05/hack-challenge-frontend
+Frontend can be found at https://github.com/larrytao05/hackchallenge-frontend
 
 ## Demo Video
 
